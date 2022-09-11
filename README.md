@@ -38,7 +38,7 @@ SiriusRating.setup()
 
 ```swift
 SiriusRating.setup(
-    requestToRatePresenter: StyleTwoRequestToRatePromptPresenter(),
+    requestPromptPresenter: StyleTwoRequestPromptPresenter(),
     debugEnabled: true,
     ratingConditions: [
         EnoughDaysUsedRatingCondition(totalDaysRequired: 14),
