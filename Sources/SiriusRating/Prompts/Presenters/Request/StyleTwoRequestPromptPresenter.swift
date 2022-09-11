@@ -2,7 +2,7 @@
 //  StyleTwoRequestPromptPresenter.swift
 //  SiriusRating
 //
-//  Created by Thomas Neuteboom on 30/08/2022.
+//  Created by Thomas Neuteboom on 14/06/2022.
 //  Copyright © 2022 The App Capital. All rights reserved.
 //
 
@@ -30,11 +30,7 @@ public class StyleTwoRequestPromptPresenter: RequestPromptPresenter {
     /// Default => `true`
     private let canOptInForReminder: Bool
 
-    /// The prompt's tint color. If the value is `nil` the presenter will use the app's global tint color.
-    /// Default => `nil`
-    private let tintColor: UIColor?
-
-    /// Designated initializer for the `StyleOneRequestPromptPresenter`.
+    /// Designated initializer for the `StyleTwoRequestPromptPresenter`.
     ///
     /// - Parameters:
     ///   - appBundle: The bundle that is used to get the app's name and icon image. Default: `Bundle.main`.
@@ -43,19 +39,16 @@ public class StyleTwoRequestPromptPresenter: RequestPromptPresenter {
     ///   try to find the display name of the app in `appBundle`. Default: `nil`.
     ///   - canOptInForReminder: Determines whether the presenter should display the 'Remind me later'-button in
     ///   the prompt. Default: `true`.
-    ///   - tintColor: The prompt's tint color. If the value is `nil` the presenter will use the app's global tint color. Default: `nil`
     public init(
         appBundle: Bundle = Bundle.main,
         localizationsBundle: Bundle? = nil,
         appName: String? = nil,
-        canOptInForReminder: Bool = true,
-        tintColor: UIColor? = nil
+        canOptInForReminder: Bool = true
     ) {
         self.appBundle = appBundle
         self.localizationsBundle = localizationsBundle ?? Bundle(for: type(of: self))
         self.appName = appName
         self.canOptInForReminder = canOptInForReminder
-        self.tintColor = tintColor
     }
 
     public func show(
@@ -64,15 +57,11 @@ public class StyleTwoRequestPromptPresenter: RequestPromptPresenter {
         didDeclineHandler: (() -> Void)? = nil
     ) {
         if self.promptWindow == nil {
-            let preferredLanguage = NSLocale.preferredLanguages[0]
-            print(preferredLanguage)
-            print(self.localizationsBundle.localizedString(forKey: "request_prompt_duration", value: nil, table: nil))
-            
             guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
                 return
             }
 
-            // To make sure the alert view controller is on top of everything we will create a new `UIWindow`.
+            // To make sure the alert controller is on top of everything we will have to create a new key `UIWindow`.
             let promptWindow = UIWindow(windowScene: windowScene)
             promptWindow.frame = UIScreen.main.bounds
             promptWindow.windowLevel = UIWindow.Level.alert + 1
@@ -80,39 +69,49 @@ public class StyleTwoRequestPromptPresenter: RequestPromptPresenter {
             promptWindow.makeKeyAndVisible()
             self.promptWindow = promptWindow
 
-            let styleTwoRequestToRateViewController = StyleTwoRequestViewController()
-            styleTwoRequestToRateViewController.preferredContentSize = CGSize(width: 320, height: 220)
-            styleTwoRequestToRateViewController.modalTransitionStyle = .crossDissolve
-            styleTwoRequestToRateViewController.modalPresentationStyle = .overCurrentContext
-            styleTwoRequestToRateViewController.isDismissableByBackgroundTap = false
-            styleTwoRequestToRateViewController.appIconImage = self.appBundle.appIcon
+            let appName = appName ?? self.appBundle.displayName ?? "App"
 
-            let appName = self.appName ?? self.appBundle.displayName ?? "App"
-            styleTwoRequestToRateViewController.titleLabel.text = String.localizedStringWithFormat(self.localizationsBundle.localizedString(forKey: "request_prompt_title", value: nil, table: nil), appName)
-            styleTwoRequestToRateViewController.durationLabel.text = self.localizationsBundle.localizedString(forKey: "request_prompt_duration", value: nil, table: nil)
-            styleTwoRequestToRateViewController.descriptionLabel.text = String.localizedStringWithFormat(self.localizationsBundle.localizedString(forKey: "request_prompt_description", value: nil, table: nil), appName)
-            styleTwoRequestToRateViewController.rateButton.setTitle(String.localizedStringWithFormat(self.localizationsBundle.localizedString(forKey: "request_prompt_rate_button_text", value: nil, table: nil), appName), for: .normal)
-            styleTwoRequestToRateViewController.optInForReminderButton.setTitle(self.localizationsBundle.localizedString(forKey: "request_prompt_opt_in_for_reminder_button_text", value: nil, table: nil), for: .normal)
+            let styleOneRequestAlertController = StyleOneRequestAlertController(
+                title: String.localizedStringWithFormat(self.localizationsBundle.localizedString(forKey: "request_prompt_title", value: nil, table: nil), appName),
+                message: String.localizedStringWithFormat(self.localizationsBundle.localizedString(forKey: "request_prompt_description", value: nil, table: nil), appName),
+                preferredStyle: .alert
+            )
 
-            styleTwoRequestToRateViewController.rateButton.backgroundColor = self.tintColor ?? windowScene.windows.first?.rootViewController?.view.tintColor
-            styleTwoRequestToRateViewController.optInForReminderButton.isHidden = !self.canOptInForReminder
+            styleOneRequestAlertController.setAppIcon(self.appBundle.appIcon)
 
-            styleTwoRequestToRateViewController.onDidPressRateButton = { styleTwoRequestToRateViewController in
-                didAgreeToRateHandler?()
-                styleTwoRequestToRateViewController.dismiss(animated: true)
+            styleOneRequestAlertController.addAction(
+                UIAlertAction(
+                    title: self.localizationsBundle.localizedString(forKey: "request_prompt_dont_rate_button_text", value: nil, table: nil),
+                    style: .default,
+                    handler: { _ in
+                        didDeclineHandler?()
+                    }
+                )
+            )
+
+            if self.canOptInForReminder {
+                styleOneRequestAlertController.addAction(
+                    UIAlertAction(
+                        title: self.localizationsBundle.localizedString(forKey: "request_prompt_opt_in_for_reminder_button_text", value: nil, table: nil),
+                        style: .default,
+                        handler: { _ in
+                            didOptInForReminderHandler?()
+                        }
+                    )
+                )
             }
 
-            styleTwoRequestToRateViewController.onDidPressOptInForReminderButton = { styleTwoRequestToRateViewController in
-                didOptInForReminderHandler?()
-                styleTwoRequestToRateViewController.dismiss(animated: true)
-            }
+            styleOneRequestAlertController.addAction(
+                UIAlertAction(
+                    title: String.localizedStringWithFormat(self.localizationsBundle.localizedString(forKey: "request_prompt_rate_button_text", value: nil, table: nil), appName),
+                    style: .default,
+                    handler: { _ in
+                        didAgreeToRateHandler?()
+                    }
+                )
+            )
 
-            styleTwoRequestToRateViewController.onDidPressCloseButton = { styleTwoRequestToRateViewController in
-                didDeclineHandler?()
-                styleTwoRequestToRateViewController.dismiss(animated: true)
-            }
-
-            styleTwoRequestToRateViewController.onDidDisappear = { [weak self] _ in
+            styleOneRequestAlertController.onDidDisappear = { [weak self] _ in
                 // On dismissal of the alert controller we want to remove the alert window from the screen.
                 // By removing the reference it will automatically dismiss the window. If we do not dismiss
                 // this window it will prevent all user interactions under it.
@@ -120,7 +119,7 @@ public class StyleTwoRequestPromptPresenter: RequestPromptPresenter {
                 self?.promptWindow = nil
             }
 
-            self.promptWindow?.rootViewController?.present(styleTwoRequestToRateViewController, animated: true)
+            self.promptWindow?.rootViewController?.present(styleOneRequestAlertController, animated: true)
         }
     }
 
