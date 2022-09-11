@@ -11,7 +11,7 @@ import UIKit
 private class BundleFinder {}
 
 extension Bundle {
-    
+
     static var moduleOrSelf: Bundle {
         #if SWIFT_PACKAGE
             return Bundle.module
@@ -19,7 +19,7 @@ extension Bundle {
             return Bundle(for: BundleFinder.self)
         #endif
     }
-    
+
     // Name of the app; the title under the app icon.
     var displayName: String? {
         return object(forInfoDictionaryKey: "CFBundleDisplayName") as? String ??

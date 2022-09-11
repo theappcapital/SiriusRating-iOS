@@ -11,7 +11,7 @@ import XCTest
 @testable import SiriusRating
 
 class SiriusRatingTest: XCTestCase {
-    
+
     private var inMemorySiriusRatingDataStore: InMemoryDataStore!
 
     /// Put setup code here. This method is called before the invocation
@@ -97,5 +97,5 @@ class SiriusRatingTest: XCTestCase {
         // After the user did a significant event the `previousOrCurrentAppVersion` should not be `nil`.
         XCTAssertNotNil(self.inMemorySiriusRatingDataStore.previousOrCurrentAppVersion)
     }
-    
+
 }

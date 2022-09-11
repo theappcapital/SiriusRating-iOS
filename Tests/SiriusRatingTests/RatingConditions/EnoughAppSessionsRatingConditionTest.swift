@@ -11,7 +11,7 @@ import XCTest
 @testable import SiriusRating
 
 class EnoughAppSessionsRatingConditionTest: XCTestCase {
-    
+
     private var inMemorySiriusRatingDataStore: InMemoryDataStore!
 
     /// Put setup code here. This method is called before the invocation
@@ -49,5 +49,5 @@ class EnoughAppSessionsRatingConditionTest: XCTestCase {
         // user is 1, where 5 or greater is required to be satisfied.
         XCTAssertFalse(enoughAppSessionsRatingCondition.isSatisfied(dataStore: self.inMemorySiriusRatingDataStore))
     }
-    
+
 }

@@ -7,13 +7,14 @@ let package = Package(
     name: "SiriusRating",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v13)
+        .iOS(.v13),
     ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "SiriusRating",
-            targets: ["SiriusRating"]),
+            targets: ["SiriusRating"]
+        ),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -25,9 +26,11 @@ let package = Package(
         .target(
             name: "SiriusRating",
             dependencies: [],
-            resources: [.process("Resources")]),
+            resources: [.process("Resources")]
+        ),
         .testTarget(
             name: "SiriusRatingTests",
-            dependencies: ["SiriusRating"]),
+            dependencies: ["SiriusRating"]
+        ),
     ]
 )

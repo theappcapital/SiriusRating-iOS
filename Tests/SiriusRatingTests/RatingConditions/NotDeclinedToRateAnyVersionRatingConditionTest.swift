@@ -11,7 +11,7 @@ import XCTest
 @testable import SiriusRating
 
 class NotDeclinedToRateAnyVersionRatingConditionTest: XCTestCase {
-    
+
     private var inMemorySiriusRatingDataStore: InMemoryDataStore!
 
     /// Put setup code here. This method is called before the invocation
@@ -81,5 +81,5 @@ class NotDeclinedToRateAnyVersionRatingConditionTest: XCTestCase {
         // passed instead of the 180 days required to show the prompt.
         XCTAssertFalse(notDeclinedToRateAnyVersionRatingCondition.isSatisfied(dataStore: self.inMemorySiriusRatingDataStore))
     }
-    
+
 }

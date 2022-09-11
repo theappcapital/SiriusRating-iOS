@@ -108,7 +108,7 @@ public class SiriusRating {
     }
 
     // MARK: Init
-    
+
     /// The designated initializer for `SiriusRating`.
     /// - Parameters:
     ///   - appVersionProvider: A provider that provides the current app version.

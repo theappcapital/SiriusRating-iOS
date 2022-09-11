@@ -11,7 +11,7 @@ import XCTest
 @testable import SiriusRating
 
 class EnoughDaysUsedRatingConditionTest: XCTestCase {
-    
+
     private var inMemorySiriusRatingDataStore: InMemoryDataStore!
 
     /// Put setup code here. This method is called before the invocation
@@ -57,5 +57,5 @@ class EnoughDaysUsedRatingConditionTest: XCTestCase {
         // for the first time was 1 days ago.
         XCTAssertFalse(enoughDaysUsedRatingCondition.isSatisfied(dataStore: self.inMemorySiriusRatingDataStore))
     }
-    
+
 }

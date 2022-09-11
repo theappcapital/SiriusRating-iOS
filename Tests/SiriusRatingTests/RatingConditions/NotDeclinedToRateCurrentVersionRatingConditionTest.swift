@@ -11,7 +11,7 @@ import XCTest
 @testable import SiriusRating
 
 class NotDeclinedToRateCurrentVersionRatingConditionTest: XCTestCase {
-    
+
     private var inMemorySiriusRatingDataStore: InMemoryDataStore!
 
     /// Put setup code here. This method is called before the invocation
@@ -61,5 +61,5 @@ class NotDeclinedToRateCurrentVersionRatingConditionTest: XCTestCase {
         // The condition should not be satisfied, because the user declined to rate the current version of the app.
         XCTAssertFalse(notDeclinedToRateCurrentVersionRatingCondition.isSatisfied(dataStore: self.inMemorySiriusRatingDataStore))
     }
-    
+
 }

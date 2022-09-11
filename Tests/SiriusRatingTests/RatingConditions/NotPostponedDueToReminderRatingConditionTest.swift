@@ -11,7 +11,7 @@ import XCTest
 @testable import SiriusRating
 
 class NotPostponedDueToReminderRatingConditionTest: XCTestCase {
-    
+
     private var inMemorySiriusRatingDataStore: InMemoryDataStore!
 
     /// Put setup code here. This method is called before the invocation
@@ -68,5 +68,5 @@ class NotPostponedDueToReminderRatingConditionTest: XCTestCase {
         // the total days before reminding is 2 (48 hours): The total days before reminding was not (yet) reached.
         XCTAssertFalse(remindMeLaterRatingCondition.isSatisfied(dataStore: self.inMemorySiriusRatingDataStore))
     }
-    
+
 }

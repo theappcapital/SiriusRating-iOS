@@ -11,7 +11,7 @@ import Foundation
 @testable import SiriusRating
 
 class InMemoryDataStore: DataStore {
-    
+
     var firstUseDate: Date?
 
     var appSessionsCount: UInt = 0
@@ -25,5 +25,5 @@ class InMemoryDataStore: DataStore {
     var ratedUserActions: [UserAction] = []
 
     var declinedToRateUserActions: [UserAction] = []
-    
+
 }

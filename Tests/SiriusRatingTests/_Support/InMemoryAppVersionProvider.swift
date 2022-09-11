@@ -9,7 +9,7 @@
 @testable import SiriusRating
 
 class InMemoryAppVersionProvider: AppVersionProvider {
-    
+
     private let _appVersion: String
 
     var appVersion: String {
@@ -19,5 +19,5 @@ class InMemoryAppVersionProvider: AppVersionProvider {
     init(appVersion: String = "0.1-thisisatestversion") {
         self._appVersion = appVersion
     }
-    
+
 }
