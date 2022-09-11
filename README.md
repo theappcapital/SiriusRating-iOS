@@ -70,14 +70,14 @@ A significant event defines an important event that occurred in your app. In a t
 that a user registered a time entry. In a game, it might be completing a level.
 
 ```swift
-SiriusRating.userDidSignificantEvent()
+SiriusRating.shared.userDidSignificantEvent()
 ```
 
 ### Show request prompt (test purposes only)
 To see how the request prompt will look like in your app simply use the following code.
 
 ```swift
-SiriusRating.showRequestPrompt()
+SiriusRating.shared.showRequestPrompt()
 ```
 
 ## Installation
