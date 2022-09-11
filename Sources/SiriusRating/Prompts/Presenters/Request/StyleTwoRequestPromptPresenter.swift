@@ -46,7 +46,7 @@ public class StyleTwoRequestPromptPresenter: RequestPromptPresenter {
         canOptInForReminder: Bool = true
     ) {
         self.appBundle = appBundle
-        self.localizationsBundle = localizationsBundle ?? Bundle(for: type(of: self))
+        self.localizationsBundle = localizationsBundle ?? Bundle.moduleOrSelf
         self.appName = appName
         self.canOptInForReminder = canOptInForReminder
     }

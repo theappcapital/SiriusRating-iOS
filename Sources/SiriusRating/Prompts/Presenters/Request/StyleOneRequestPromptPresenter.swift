@@ -52,7 +52,7 @@ public class StyleOneRequestPromptPresenter: RequestPromptPresenter {
         tintColor: UIColor? = nil
     ) {
         self.appBundle = appBundle
-        self.localizationsBundle = localizationsBundle ?? Bundle(for: type(of: self))
+        self.localizationsBundle = localizationsBundle ?? Bundle.moduleOrSelf
         self.appName = appName
         self.canOptInForReminder = canOptInForReminder
         self.tintColor = tintColor
