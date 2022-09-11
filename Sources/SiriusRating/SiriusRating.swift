@@ -364,7 +364,7 @@ public class SiriusRating {
 
     // MARK: Prompts
 
-    func showRequestPrompt() {
+    public func showRequestPrompt() {
         DispatchQueue.main.async {
             self.requestPromptPresenter.show(
                 didAgreeToRateHandler: {
