@@ -23,6 +23,14 @@ A modern utility that reminds your iOS app's users to review the app in a non-in
 ### Simple One-line Setup
 
 ```swift
+// By default uses the following rating conditions:
+// [EnoughDaysUsedRatingCondition(totalDaysRequired: 30),
+//  EnoughAppSessionsRatingCondition(totalAppSessionsRequired: 15),
+//  EnoughSignificantEventsRatingCondition(significantEventsRequired: 20),
+//  NotPostponedDueToReminderRatingCondition(totalDaysBeforeReminding: 7),  
+//  NotDeclinedToRateAnyVersionRatingCondition(daysAfterDecliningToPromptUserAgain: 30, backOffFactor: 2.0, maxRecurringPromptsAfterDeclining: 2),
+//  NotRatedCurrentVersionRatingCondition(),
+//  NotRatedAnyVersionRatingCondition(daysAfterRatingToPromptUserAgain: 240, maxRecurringPromptsAfterRating: UInt.max)]
 SiriusRating.setup()
 ```
 
@@ -31,14 +39,25 @@ SiriusRating.setup()
 ```swift
 SiriusRating.setup(
     ratingConditions: [
-        EnoughDaysUsedRatingCondition(totalDaysRequired: 30),
+        EnoughDaysUsedRatingCondition(totalDaysRequired: 14),
         EnoughAppSessionsRatingCondition(totalAppSessionsRequired: 20),
         EnoughSignificantEventsRatingCondition(significantEventsRequired: 30),
+        // Important rating conditions, do not forget these:
         NotPostponedDueToReminderRatingCondition(totalDaysBeforeReminding: 14),
         NotDeclinedToRateAnyVersionRatingCondition(daysAfterDecliningToPromptUserAgain: 30, backOffFactor: 2.0, maxRecurringPromptsAfterDeclining: 3),
         NotRatedCurrentVersionRatingCondition(),
         NotRatedAnyVersionRatingCondition(daysAfterRatingToPromptUserAgain: 240, maxRecurringPromptsAfterRating: UInt.max)
-    ]
+    ],
+    canPromptUserToRateOnLaunch: true,
+    didOptInForReminderHandler: {
+        analytics.track(.did_opt_in_for_reminder_to_rate_app)
+    },
+    didDeclineToRateHandler: {
+        analytics.track(.did_decline_to_rate_app)
+    },
+    didRateHandler: {
+        analytics.track(.did_rate_app)
+    }
 )
 ```
 
