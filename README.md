@@ -19,9 +19,9 @@ A modern utility that reminds your iOS app's users to review the app in a non-in
 - iOS 13.0+
 
 ## Setup
+Configure a SiriusRating shared instance, typically in your App's initializer or app delegate's `application(_:didFinishLaunchingWithOptions:)` method:
 
 ### Simple One-line Setup
-Configure a SiriusRating shared instance, typically in your App's initializer or app delegate's application(_:didFinishLaunchingWithOptions:) method:
 
 ```swift
 // By default uses the following rating conditions:
