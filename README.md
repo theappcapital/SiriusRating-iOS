@@ -15,4 +15,4 @@ A modern utility that reminds your iOS app's users to review the app in a non-in
 
 ## License
 
-SiriusRating is released under the MIT license. [See LICENSE](https://github.com/theappcapital/SiriusRating/master/LICENSE) for details.
+SiriusRating is released under the MIT license. [See LICENSE](https://github.com/theappcapital/SiriusRating/blob/master/LICENSE) for details.
