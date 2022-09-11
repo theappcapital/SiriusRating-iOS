@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.license      = "MIT"
   s.author       = "Thomas Neuteboom"
   s.source       = { :git => "https://github.com/theappcapital/SiriusRating.git", :tag => "#{s.version}" }
-  s.source_files  = "Classes", "Source/*.swift"
+  s.source_files  = "Classes", "Sources/*.swift"
   s.swift_version = '5.3'
 
   s.ios.deployment_target = "14.0"
