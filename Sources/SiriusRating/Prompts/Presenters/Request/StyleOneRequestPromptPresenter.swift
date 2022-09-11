@@ -64,10 +64,6 @@ public class StyleOneRequestPromptPresenter: RequestPromptPresenter {
         didDeclineHandler: (() -> Void)? = nil
     ) {
         if self.promptWindow == nil {
-            let preferredLanguage = NSLocale.preferredLanguages[0]
-            print(preferredLanguage)
-            print(self.localizationsBundle.localizedString(forKey: "request_prompt_duration", value: nil, table: nil))
-            
             guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
                 return
             }
