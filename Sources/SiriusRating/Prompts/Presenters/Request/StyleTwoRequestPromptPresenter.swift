@@ -52,7 +52,7 @@ public class StyleTwoRequestPromptPresenter: RequestPromptPresenter {
         tintColor: UIColor? = nil
     ) {
         self.appBundle = appBundle
-        self.localizationsBundle = localizationsBundle ?? Bundle.module
+        self.localizationsBundle = localizationsBundle ?? Bundle(for: type(of: self))
         self.appName = appName
         self.canOptInForReminder = canOptInForReminder
         self.tintColor = tintColor

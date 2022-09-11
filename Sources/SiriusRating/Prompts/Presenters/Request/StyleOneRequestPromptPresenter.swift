@@ -46,7 +46,7 @@ public class StyleOneRequestPromptPresenter: RequestPromptPresenter {
         canOptInForReminder: Bool = true
     ) {
         self.appBundle = appBundle
-        self.localizationsBundle = localizationsBundle ?? Bundle.module
+        self.localizationsBundle = localizationsBundle ?? Bundle(for: type(of: self))
         self.appName = appName
         self.canOptInForReminder = canOptInForReminder
     }

@@ -135,7 +135,7 @@ class StyleTwoRequestViewController: UIViewController {
         let closeButton = UIButton(type: .system)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         closeButton.tintColor = .darkGray
-        closeButton.setImage(UIImage(named: "cross_icon", in: Bundle.module, compatibleWith: nil), for: .normal)
+        closeButton.setImage(UIImage(named: "cross_icon", in: Bundle(for: type(of: self)), compatibleWith: nil), for: .normal)
         closeButton.addTarget(
             self,
             action: #selector(self.didTouchUpInsideCloseButton),
