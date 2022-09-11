@@ -24,15 +24,20 @@ Configure a SiriusRating shared instance, typically in your App's initializer or
 ### Simple One-line Setup
 
 ```swift
-// By default uses the following rating conditions:
-// [EnoughDaysUsedRatingCondition(totalDaysRequired: 30),
-//  EnoughAppSessionsRatingCondition(totalAppSessionsRequired: 15),
-//  EnoughSignificantEventsRatingCondition(significantEventsRequired: 20),
-//  NotPostponedDueToReminderRatingCondition(totalDaysBeforeReminding: 7),  
-//  NotDeclinedToRateAnyVersionRatingCondition(daysAfterDecliningToPromptUserAgain: 30, backOffFactor: 2.0, maxRecurringPromptsAfterDeclining: 2),
-//  NotRatedCurrentVersionRatingCondition(),
-//  NotRatedAnyVersionRatingCondition(daysAfterRatingToPromptUserAgain: 240, maxRecurringPromptsAfterRating: UInt.max)]
 SiriusRating.setup()
+```
+
+SiriusRating uses by default the following rating conditions:
+```swift
+ratingConditions: [
+  EnoughDaysUsedRatingCondition(totalDaysRequired: 30),
+  EnoughAppSessionsRatingCondition(totalAppSessionsRequired: 15),
+  EnoughSignificantEventsRatingCondition(significantEventsRequired: 20),
+  NotPostponedDueToReminderRatingCondition(totalDaysBeforeReminding: 7),  
+  NotDeclinedToRateAnyVersionRatingCondition(daysAfterDecliningToPromptUserAgain: 30, backOffFactor: 2.0, maxRecurringPromptsAfterDeclining: 2),
+  NotRatedCurrentVersionRatingCondition(),
+  NotRatedAnyVersionRatingCondition(daysAfterRatingToPromptUserAgain: 240, maxRecurringPromptsAfterRating: UInt.max)
+]
 ```
 
 ### Custom Configuration
@@ -74,11 +79,36 @@ that a user registered a time entry. In a game, it might be completing a level.
 SiriusRating.shared.userDidSignificantEvent()
 ```
 
-### Show request prompt (test purposes only)
+### Test request prompt 
 To see how the request prompt will look like in your app simply use the following code.
 
 ```swift
+// For test purposes only!
 SiriusRating.shared.showRequestPrompt()
+```
+
+## Customization
+
+### Change tint color
+SiriusRating will automatically use the global tint color.
+```swift
+UIView.appearance().tintColor = .red
+```
+Or you can set it manually:
+```swift
+SiriusRating.setup(
+    requestPromptPresenter: StyleTwoRequestPromptPresenter(tintColor: .red),
+    ...
+)
+```
+
+### Change app name
+SiriusRating will automatically use the app's display name. If you don't want to use this name you can set it manually:
+```swift
+SiriusRating.setup(
+    requestPromptPresenter: StyleTwoRequestPromptPresenter(appName: "App Name"),
+    ...
+)
 ```
 
 ## Installation
