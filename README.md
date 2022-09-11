@@ -38,6 +38,8 @@ SiriusRating.setup()
 
 ```swift
 SiriusRating.setup(
+    requestToRatePresenter: StyleTwoRequestToRatePromptPresenter(),
+    debugEnabled: true,
     ratingConditions: [
         EnoughDaysUsedRatingCondition(totalDaysRequired: 14),
         EnoughAppSessionsRatingCondition(totalAppSessionsRequired: 20),
@@ -50,13 +52,13 @@ SiriusRating.setup(
     ],
     canPromptUserToRateOnLaunch: true,
     didOptInForReminderHandler: {
-        analytics.track(.did_opt_in_for_reminder_to_rate_app)
+        analytics.track(.didOptInForReminderToRateApp)
     },
     didDeclineToRateHandler: {
-        analytics.track(.did_decline_to_rate_app)
+        analytics.track(.didDeclineToRateApp)
     },
     didRateHandler: {
-        analytics.track(.did_rate_app)
+        analytics.track(.didRateApp)
     }
 )
 ```
