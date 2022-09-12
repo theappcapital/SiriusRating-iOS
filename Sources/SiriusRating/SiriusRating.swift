@@ -80,7 +80,7 @@ public final class SiriusRating {
     private let appVersionProvider: AppVersionProvider
 
     /// A data store where we store all counters, significant events, app sessions and performed user actions etc.
-    private let dataStore: DataStore
+    let dataStore: DataStore
 
     /// The presenter that is used to show the first prompt; the prompt where we ask if the user wants to rate the app.
     private let requestPromptPresenter: RequestPromptPresenter
