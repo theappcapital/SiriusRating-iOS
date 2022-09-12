@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class SiriusRating {
+public final class SiriusRating {
 
     /// The singleton instance. This can only be set by setup().
     private static var _shared: SiriusRating?
