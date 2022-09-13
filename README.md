@@ -114,7 +114,7 @@ The rating conditions are used to validate if the user can be prompted to rate t
 | `NotRatedAnyVersionRatingCondition` | The rating condition that validates that the user didn't rate any version of the app. If the user did rate the app, validate if we can show the prompt again by checking the number of days that have passed since the user's rated last. |
 
 ### Custom rating conditions
-You can write your own rating conditions in addition to the current rating conditions to further stimulate a positive review. 
+You can write your own rating conditions in addition to the current rating conditions to further stimulate positive reviews. 
 
 ```swift
 class GoodWeatherRatingCondition: RatingCondition {
@@ -133,7 +133,7 @@ class GoodWeatherRatingCondition: RatingCondition {
 }
 ```
 
-To make use of the new rating conditions simply add it to list.
+To make use of the new rating condition simply add it to list.
 
 ```swift
 SiriusRating.setup(
