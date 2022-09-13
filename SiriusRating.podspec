@@ -8,6 +8,6 @@ Pod::Spec.new do |s|
   s.source        = { :git => "https://github.com/theappcapital/SiriusRating.git", :tag => "#{s.version}" }
   s.source_files  = "Sources/SiriusRating/**/*.{h,m,swift}"
   s.resources     = ["Sources/SiriusRating/Resources/**/*"]
-  s.swift_version = '5.3'
+  s.swift_version = '5.4'
   s.ios.deployment_target = "13.0"
 end
