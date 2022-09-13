@@ -133,6 +133,17 @@ class GoodWeatherRatingCondition: RatingCondition {
 }
 ```
 
+To make use of the new rating conditions simply add it to list.
+
+```swift
+SiriusRating.setup(
+    ratingConditions: [
+        ...,
+        GoodWeatherRatingCondition(weatherRepository: WeatherDataRepository())
+    ]
+)
+```
+
 ## Customization
 
 ### Presenters
