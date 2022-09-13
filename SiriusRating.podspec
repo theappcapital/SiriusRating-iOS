@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name          = "SiriusRating"
-  s.version       = "1.0.3"
+  s.version       = "1.0.4"
   s.summary       = "A modern utility that reminds your iOS app's users to review the app in a non-invasive way.."
   s.homepage      = "https://github.com/theappcapital/SiriusRating"
   s.license       = "MIT"
