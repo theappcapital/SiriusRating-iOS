@@ -16,7 +16,8 @@ A modern utility that reminds your iOS app's users to review the app in a non-in
 ## Features
 
 - [x] SwiftUI and UIKit support
-- [x] Fully configurable rating conditions
+- [x] Configurable rating conditions
+- [x] Write your own rating conditions to further stimulate positive reviews.
 - [x] Modern design 
 - [x] Non-invasive approach
 - [x] Specification pattern used to build the rating conditions
