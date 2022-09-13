@@ -176,6 +176,28 @@ SiriusRating.setup(
 )
 ```
 
+### Change texts
+You can change the texts by giving the presenter a bundle that contains your custom localized strings.
+
+```swift
+SiriusRating.setup(
+    requestPromptPresenter: StyleOneRequestPromptPresenter(localizationsBundle: Bundle.main)
+)
+```
+
+Then you can change the texts in your localizable strings file, for example in: `Localizable.strings`.
+
+```swift
+// ...
+
+"request_prompt_title" = "Rate %@";
+"request_prompt_duration" = "(duration: less than 10 seconds)";
+"request_prompt_description" = "If you enjoy using %@, would you mind taking a moment to rate it? Thanks for your support!";
+"request_prompt_rate_button_text" = "Rate %@";
+"request_prompt_dont_rate_button_text" = "No, thanks";
+"request_prompt_opt_in_for_reminder_button_text" = "Remind me later";
+```
+
 ### Change tint color
 SiriusRating will automatically use the global tint color.
 ```swift
