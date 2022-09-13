@@ -99,6 +99,40 @@ To see how the request prompt will look like in your app simply use the followin
 SiriusRating.shared.showRequestPrompt()
 ```
 
+## Rating conditions
+The rating conditions are used to validate if the user can be prompted to rate the app. The validation process happens after the user did a significant event (`userDidSignificantEvent()`). The user will be prompted to rate the app if all rating conditions are satisfied (returning `true`).
+
+| Rating conditions | Description |
+| --- | --- |
+| `EnoughAppSessionsRatingCondition` | The rating condition that validates if the app has been launched or brought into the foreground enough times. |
+| `EnoughDaysUsedRatingCondition` | The rating condition that validates if the app has been used long enough. |
+| `EnoughSignificantEventsRatingCondition` | The rating condition that validates whether the user has done enough significant events. |
+| `NotDeclinedToRateAnyVersionRatingCondition` | The rating condition that validates that the user didn't decline to rate a version of the app. If the user did decline to rate the app, validate if we can show the prompt again by checking the number of days that have passed after the user's initial decline. |
+| `NotPostponedDueToReminderRatingCondition` | The rating condition that validates if the user didn't decline the current version of the app. With this condition we do not want to prompt the user to rate the app again if it declined to rate the current version of the app. |
+| `NotPostponedDueToReminderRatingCondition` | The rating condition that validates if the prompt was not postponed due an opted-in reminder. If the user did opt-in for a reminder, it will check if the total number of days have passed to show the prompt again. |
+| `NotRatedCurrentVersionRatingCondition` |  The rating condition that checks if the user didn't already rate the current version of the app. We do not want to prompt the user to rate the app again if it already rated this version of the app. |
+| `NotRatedAnyVersionRatingCondition` | The rating condition that validates that the user didn't rate any version of the app. If the user did rate the app, validate if we can show the prompt again by checking the number of days that have passed since the user's rated last. |
+
+### Custom rating conditions
+You can write your own rating conditions in addition to the current rating conditions to further stimulate a positive review. 
+
+```swift
+class GoodWeatherRatingCondition: RatingCondition {
+
+    private let weatherRepository: WeatherRepository
+    
+    init(weatherRepository: WeatherRepository) {
+        self.weatherRepository = weatherRepository
+    }
+    
+    func isSatisfied(dataStore: DataStore) -> Bool {
+        // Only show the rating prompt when it's sunny outside.
+        return self.weatherRepository.getWeather().isSunny
+    }
+    
+}
+```
+
 ## Customization
 
 ### Presenters
