@@ -7,7 +7,7 @@
 */
 
 "request_prompt_title" = "Rate %@";
-"request_prompt_duration" = "(duration: less then 10 seconds)";
+"request_prompt_duration" = "(duration: less than 10 seconds)";
 "request_prompt_description" = "If you enjoy using %@, would you mind taking a moment to rate it? Thanks for your support!";
 "request_prompt_rate_button_text" = "Rate %@";
 "request_prompt_dont_rate_button_text" = "No, thanks";
