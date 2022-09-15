@@ -1,5 +1,5 @@
 //
-//  StyleTwoRequestViewController.swift
+//  StyleOneRequestViewController.swift
 //  SiriusRating
 //
 //  Created by Thomas Neuteboom on 04/09/2022.
@@ -8,15 +8,15 @@
 
 import UIKit
 
-class StyleTwoRequestViewController: UIViewController {
+class StyleOneRequestViewController: UIViewController {
 
-    var onDidDisappear: ((StyleTwoRequestViewController) -> Void)?
+    var onDidDisappear: ((StyleOneRequestViewController) -> Void)?
 
-    var onDidPressRateButton: ((StyleTwoRequestViewController) -> Void)?
+    var onDidPressRateButton: ((StyleOneRequestViewController) -> Void)?
 
-    var onDidPressOptInForReminderButton: ((StyleTwoRequestViewController) -> Void)?
+    var onDidPressOptInForReminderButton: ((StyleOneRequestViewController) -> Void)?
 
-    var onDidPressCloseButton: ((StyleTwoRequestViewController) -> Void)?
+    var onDidPressCloseButton: ((StyleOneRequestViewController) -> Void)?
 
     /// The dark translucent background behind the content view.
     lazy var darkTranslucentBackground: UIView = {

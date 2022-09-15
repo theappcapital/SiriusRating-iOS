@@ -71,15 +71,15 @@ public class StyleTwoRequestPromptPresenter: RequestPromptPresenter {
 
             let appName = appName ?? self.appBundle.displayName ?? "App"
 
-            let styleOneRequestAlertController = StyleOneRequestAlertController(
+            let styleTwoRequestAlertController = StyleTwoRequestAlertController(
                 title: String.localizedStringWithFormat(self.localizationsBundle.localizedString(forKey: "request_prompt_title", value: nil, table: nil), appName),
                 message: String.localizedStringWithFormat(self.localizationsBundle.localizedString(forKey: "request_prompt_description", value: nil, table: nil), appName),
                 preferredStyle: .alert
             )
 
-            styleOneRequestAlertController.setAppIcon(self.appBundle.appIcon)
+            styleTwoRequestAlertController.setAppIcon(self.appBundle.appIcon)
 
-            styleOneRequestAlertController.addAction(
+            styleTwoRequestAlertController.addAction(
                 UIAlertAction(
                     title: self.localizationsBundle.localizedString(forKey: "request_prompt_dont_rate_button_text", value: nil, table: nil),
                     style: .default,
@@ -90,7 +90,7 @@ public class StyleTwoRequestPromptPresenter: RequestPromptPresenter {
             )
 
             if self.canOptInForReminder {
-                styleOneRequestAlertController.addAction(
+                styleTwoRequestAlertController.addAction(
                     UIAlertAction(
                         title: self.localizationsBundle.localizedString(forKey: "request_prompt_opt_in_for_reminder_button_text", value: nil, table: nil),
                         style: .default,
@@ -101,7 +101,7 @@ public class StyleTwoRequestPromptPresenter: RequestPromptPresenter {
                 )
             }
 
-            styleOneRequestAlertController.addAction(
+            styleTwoRequestAlertController.addAction(
                 UIAlertAction(
                     title: String.localizedStringWithFormat(self.localizationsBundle.localizedString(forKey: "request_prompt_rate_button_text", value: nil, table: nil), appName),
                     style: .default,
@@ -111,7 +111,7 @@ public class StyleTwoRequestPromptPresenter: RequestPromptPresenter {
                 )
             )
 
-            styleOneRequestAlertController.onDidDisappear = { [weak self] _ in
+            styleTwoRequestAlertController.onDidDisappear = { [weak self] _ in
                 // On dismissal of the alert controller we want to remove the alert window from the screen.
                 // By removing the reference it will automatically dismiss the window. If we do not dismiss
                 // this window it will prevent all user interactions under it.
@@ -119,7 +119,7 @@ public class StyleTwoRequestPromptPresenter: RequestPromptPresenter {
                 self?.promptWindow = nil
             }
 
-            self.promptWindow?.rootViewController?.present(styleOneRequestAlertController, animated: true)
+            self.promptWindow?.rootViewController?.present(styleTwoRequestAlertController, animated: true)
         }
     }
 

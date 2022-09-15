@@ -9,7 +9,7 @@
 import UIKit
 
 /// Credits to: https://github.com/stringcode86/AlertViewController for the image above the title using a `UIAlertController`.
-class StyleOneRequestAlertController: UIAlertController {
+class StyleTwoRequestAlertController: UIAlertController {
 
     var onDidDisappear: ((UIAlertController) -> Void)?
 

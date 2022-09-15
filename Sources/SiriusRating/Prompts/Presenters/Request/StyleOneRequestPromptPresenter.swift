@@ -76,39 +76,39 @@ public class StyleOneRequestPromptPresenter: RequestPromptPresenter {
             promptWindow.makeKeyAndVisible()
             self.promptWindow = promptWindow
 
-            let styleTwoRequestToRateViewController = StyleTwoRequestViewController()
-            styleTwoRequestToRateViewController.preferredContentSize = CGSize(width: 320, height: 220)
-            styleTwoRequestToRateViewController.modalTransitionStyle = .crossDissolve
-            styleTwoRequestToRateViewController.modalPresentationStyle = .overCurrentContext
-            styleTwoRequestToRateViewController.isDismissableByBackgroundTap = false
-            styleTwoRequestToRateViewController.appIconImage = self.appBundle.appIcon
+            let styleOneRequestViewController = StyleOneRequestViewController()
+            styleOneRequestViewController.preferredContentSize = CGSize(width: 320, height: 220)
+            styleOneRequestViewController.modalTransitionStyle = .crossDissolve
+            styleOneRequestViewController.modalPresentationStyle = .overCurrentContext
+            styleOneRequestViewController.isDismissableByBackgroundTap = false
+            styleOneRequestViewController.appIconImage = self.appBundle.appIcon
 
             let appName = self.appName ?? self.appBundle.displayName ?? "App"
-            styleTwoRequestToRateViewController.titleLabel.text = String.localizedStringWithFormat(self.localizationsBundle.localizedString(forKey: "request_prompt_title", value: nil, table: nil), appName)
-            styleTwoRequestToRateViewController.durationLabel.text = self.localizationsBundle.localizedString(forKey: "request_prompt_duration", value: nil, table: nil)
-            styleTwoRequestToRateViewController.descriptionLabel.text = String.localizedStringWithFormat(self.localizationsBundle.localizedString(forKey: "request_prompt_description", value: nil, table: nil), appName)
-            styleTwoRequestToRateViewController.rateButton.setTitle(String.localizedStringWithFormat(self.localizationsBundle.localizedString(forKey: "request_prompt_rate_button_text", value: nil, table: nil), appName), for: .normal)
-            styleTwoRequestToRateViewController.optInForReminderButton.setTitle(self.localizationsBundle.localizedString(forKey: "request_prompt_opt_in_for_reminder_button_text", value: nil, table: nil), for: .normal)
+            styleOneRequestViewController.titleLabel.text = String.localizedStringWithFormat(self.localizationsBundle.localizedString(forKey: "request_prompt_title", value: nil, table: nil), appName)
+            styleOneRequestViewController.durationLabel.text = self.localizationsBundle.localizedString(forKey: "request_prompt_duration", value: nil, table: nil)
+            styleOneRequestViewController.descriptionLabel.text = String.localizedStringWithFormat(self.localizationsBundle.localizedString(forKey: "request_prompt_description", value: nil, table: nil), appName)
+            styleOneRequestViewController.rateButton.setTitle(String.localizedStringWithFormat(self.localizationsBundle.localizedString(forKey: "request_prompt_rate_button_text", value: nil, table: nil), appName), for: .normal)
+            styleOneRequestViewController.optInForReminderButton.setTitle(self.localizationsBundle.localizedString(forKey: "request_prompt_opt_in_for_reminder_button_text", value: nil, table: nil), for: .normal)
 
-            styleTwoRequestToRateViewController.rateButton.backgroundColor = self.tintColor ?? windowScene.windows.first?.rootViewController?.view.tintColor
-            styleTwoRequestToRateViewController.optInForReminderButton.isHidden = !self.canOptInForReminder
+            styleOneRequestViewController.rateButton.backgroundColor = self.tintColor ?? windowScene.windows.first?.rootViewController?.view.tintColor
+            styleOneRequestViewController.optInForReminderButton.isHidden = !self.canOptInForReminder
 
-            styleTwoRequestToRateViewController.onDidPressRateButton = { styleTwoRequestToRateViewController in
+            styleOneRequestViewController.onDidPressRateButton = { styleOneRequestViewController in
                 didAgreeToRateHandler?()
-                styleTwoRequestToRateViewController.dismiss(animated: true)
+                styleOneRequestViewController.dismiss(animated: true)
             }
 
-            styleTwoRequestToRateViewController.onDidPressOptInForReminderButton = { styleTwoRequestToRateViewController in
+            styleOneRequestViewController.onDidPressOptInForReminderButton = { styleOneRequestViewController in
                 didOptInForReminderHandler?()
-                styleTwoRequestToRateViewController.dismiss(animated: true)
+                styleOneRequestViewController.dismiss(animated: true)
             }
 
-            styleTwoRequestToRateViewController.onDidPressCloseButton = { styleTwoRequestToRateViewController in
+            styleOneRequestViewController.onDidPressCloseButton = { styleOneRequestViewController in
                 didDeclineHandler?()
-                styleTwoRequestToRateViewController.dismiss(animated: true)
+                styleOneRequestViewController.dismiss(animated: true)
             }
 
-            styleTwoRequestToRateViewController.onDidDisappear = { [weak self] _ in
+            styleOneRequestViewController.onDidDisappear = { [weak self] _ in
                 // On dismissal of the alert controller we want to remove the alert window from the screen.
                 // By removing the reference it will automatically dismiss the window. If we do not dismiss
                 // this window it will prevent all user interactions under it.
@@ -116,7 +116,7 @@ public class StyleOneRequestPromptPresenter: RequestPromptPresenter {
                 self?.promptWindow = nil
             }
 
-            self.promptWindow?.rootViewController?.present(styleTwoRequestToRateViewController, animated: true)
+            self.promptWindow?.rootViewController?.present(styleOneRequestViewController, animated: true)
         }
     }
 
