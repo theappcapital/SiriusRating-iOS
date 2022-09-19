@@ -210,9 +210,9 @@ class StyleOneRequestViewController: UIViewController {
         NSLayoutConstraint.activate([
             self.appIconImageView.heightAnchor.constraint(equalTo: self.appIconImageView.widthAnchor),
             self.appIconImageView.heightAnchor.constraint(greaterThanOrEqualToConstant: 50),
-            self.appIconImageView.widthAnchor.constraint(greaterThanOrEqualToConstant: 50)
+            self.appIconImageView.widthAnchor.constraint(greaterThanOrEqualToConstant: 50),
         ])
-        
+
         NSLayoutConstraint.activate([
             self.darkTranslucentBackground.topAnchor.constraint(equalTo: self.view.topAnchor),
             self.darkTranslucentBackground.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
@@ -225,7 +225,7 @@ class StyleOneRequestViewController: UIViewController {
             self.stackView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -16),
             self.stackView.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -24),
             self.stackView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 16),
-            self.stackView.centerXAnchor.constraint(equalTo: self.containerView.centerXAnchor)
+            self.stackView.centerXAnchor.constraint(equalTo: self.containerView.centerXAnchor),
         ])
 
         NSLayoutConstraint.activate([
@@ -255,7 +255,7 @@ class StyleOneRequestViewController: UIViewController {
             self.containerView.leadingAnchor.constraint(greaterThanOrEqualTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
         ])
     }
-    
+
     // MARK: - Selectors
 
     /// Called whenever the dark translucent background view was tapped.
