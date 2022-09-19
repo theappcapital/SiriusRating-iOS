@@ -77,7 +77,6 @@ public class StyleOneRequestPromptPresenter: RequestPromptPresenter {
             self.promptWindow = promptWindow
 
             let styleOneRequestViewController = StyleOneRequestViewController()
-            styleOneRequestViewController.preferredContentSize = CGSize(width: 320, height: 220)
             styleOneRequestViewController.modalTransitionStyle = .crossDissolve
             styleOneRequestViewController.modalPresentationStyle = .overCurrentContext
             styleOneRequestViewController.isDismissableByBackgroundTap = false

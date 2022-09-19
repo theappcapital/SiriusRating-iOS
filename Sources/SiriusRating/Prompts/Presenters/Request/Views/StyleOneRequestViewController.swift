@@ -42,9 +42,11 @@ class StyleOneRequestViewController: UIViewController {
     /// The image view displaying the app icon.
     private lazy var appIconImageView: UIImageView = {
         let appIconImageView = UIImageView()
+        appIconImageView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        appIconImageView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        appIconImageView.translatesAutoresizingMaskIntoConstraints = false
         appIconImageView.contentMode = .scaleAspectFit
         appIconImageView.layer.masksToBounds = true
-
         return appIconImageView
     }()
 
@@ -67,22 +69,21 @@ class StyleOneRequestViewController: UIViewController {
             ]
         )
 
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.setCustomSpacing(24.0, after: self.appIconImageView)
+        stackView.setCustomSpacing(18.0, after: self.appIconImageView)
         stackView.setCustomSpacing(2.0, after: self.titleLabel)
-        stackView.setCustomSpacing(12.0, after: self.durationLabel)
-        stackView.setCustomSpacing(18.0, after: self.descriptionLabel)
-        stackView.setCustomSpacing(8.0, after: self.rateButton)
-
+        stackView.setCustomSpacing(8.0, after: self.durationLabel)
+        stackView.setCustomSpacing(14.0, after: self.descriptionLabel)
+        stackView.setCustomSpacing(6.0, after: self.rateButton)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.alignment = .center
         stackView.axis = .vertical
-        stackView.spacing = 16
-
         return stackView
     }()
 
     lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
+        titleLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+        titleLabel.setContentCompressionResistancePriority(.required, for: .vertical)
         titleLabel.font = .systemFont(ofSize: 20, weight: .medium)
         titleLabel.textColor = .label
         titleLabel.textAlignment = .center
@@ -92,6 +93,8 @@ class StyleOneRequestViewController: UIViewController {
 
     lazy var durationLabel: UILabel = {
         let durationLabel = UILabel()
+        durationLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+        durationLabel.setContentCompressionResistancePriority(.required, for: .vertical)
         durationLabel.font = .systemFont(ofSize: 14)
         durationLabel.textColor = .label
         durationLabel.textAlignment = .center
@@ -195,9 +198,9 @@ class StyleOneRequestViewController: UIViewController {
     private func boot() {
         self.view.addSubview(self.darkTranslucentBackground)
 
-        self.contentView.addSubview(self.stackView)
-        self.contentView.addSubview(self.closeButton)
-        self.view.addSubview(self.contentView)
+        self.containerView.contentView.addSubview(self.stackView)
+        self.containerView.contentView.addSubview(self.closeButton)
+        self.view.addSubview(self.containerView)
 
         self.setupViewLayoutConstraints()
     }
@@ -205,25 +208,31 @@ class StyleOneRequestViewController: UIViewController {
     /// Setup all the view's layout constraints here.
     private func setupViewLayoutConstraints() {
         NSLayoutConstraint.activate([
-            self.darkTranslucentBackground.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0),
-            self.darkTranslucentBackground.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
-            self.darkTranslucentBackground.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0),
-            self.darkTranslucentBackground.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
+            self.appIconImageView.heightAnchor.constraint(equalTo: self.appIconImageView.widthAnchor),
+            self.appIconImageView.heightAnchor.constraint(greaterThanOrEqualToConstant: 50),
+            self.appIconImageView.widthAnchor.constraint(greaterThanOrEqualToConstant: 50)
+        ])
+        
+        NSLayoutConstraint.activate([
+            self.darkTranslucentBackground.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.darkTranslucentBackground.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.darkTranslucentBackground.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            self.darkTranslucentBackground.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
         ])
 
         NSLayoutConstraint.activate([
-            self.stackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 24),
-            self.stackView.trailingAnchor.constraint(lessThanOrEqualTo: self.contentView.trailingAnchor, constant: -16),
-            self.stackView.bottomAnchor.constraint(lessThanOrEqualTo: self.contentView.bottomAnchor, constant: -24),
-            self.stackView.leadingAnchor.constraint(greaterThanOrEqualTo: self.contentView.leadingAnchor, constant: 16),
-            self.stackView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
+            self.stackView.topAnchor.constraint(equalTo: self.containerView.topAnchor, constant: 24),
+            self.stackView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -16),
+            self.stackView.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -24),
+            self.stackView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 16),
+            self.stackView.centerXAnchor.constraint(equalTo: self.containerView.centerXAnchor)
         ])
 
         NSLayoutConstraint.activate([
             self.closeButton.heightAnchor.constraint(equalToConstant: 44),
             self.closeButton.widthAnchor.constraint(equalToConstant: 44),
-            self.closeButton.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 2),
-            self.closeButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -2),
+            self.closeButton.topAnchor.constraint(equalTo: self.containerView.topAnchor, constant: 2),
+            self.closeButton.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -2),
         ])
 
         NSLayoutConstraint.activate([
@@ -236,31 +245,23 @@ class StyleOneRequestViewController: UIViewController {
     /// A separate function to setup the view layout constraints for the content
     /// view since it is based on the `preferredContentSize`.
     private func setupViewLayoutConstraintsForTheContentView() {
-        let widthConstraint = self.contentView.widthAnchor.constraint(equalToConstant: self.preferredContentSize.width)
-        widthConstraint.priority = UILayoutPriority(500)
-
-        let heightConstraint = self.contentView.heightAnchor.constraint(equalToConstant: self.preferredContentSize.height)
-        heightConstraint.priority = UILayoutPriority(500)
-
         NSLayoutConstraint.activate([
-            self.contentView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            self.contentView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
-            widthConstraint,
-            heightConstraint,
-            self.contentView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8),
-            self.contentView.topAnchor.constraint(greaterThanOrEqualTo: self.view.topAnchor, constant: 40),
-            self.contentView.trailingAnchor.constraint(lessThanOrEqualTo: self.view.trailingAnchor, constant: -20),
-            self.contentView.bottomAnchor.constraint(lessThanOrEqualTo: self.view.bottomAnchor, constant: -40),
-            self.contentView.leadingAnchor.constraint(greaterThanOrEqualTo: self.view.leadingAnchor, constant: 20),
+            self.containerView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.containerView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            self.containerView.widthAnchor.constraint(lessThanOrEqualToConstant: 300),
+            self.containerView.topAnchor.constraint(greaterThanOrEqualTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            self.containerView.trailingAnchor.constraint(lessThanOrEqualTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            self.containerView.bottomAnchor.constraint(lessThanOrEqualTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            self.containerView.leadingAnchor.constraint(greaterThanOrEqualTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
         ])
     }
-
+    
     // MARK: - Selectors
 
     /// Called whenever the dark translucent background view was tapped.
     @objc private func didTapInsideDarkTranslucentBackgroundView() {
         if self.isDismissableByBackgroundTap {
-            dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
     }
 
