@@ -34,7 +34,7 @@ class StyleOneRequestViewController: UIViewController {
         let contentView = UIVisualEffectView(effect: blurEffect)
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.layer.masksToBounds = true
-        contentView.backgroundColor = .systemBackground.withAlphaComponent(0.2)
+        contentView.backgroundColor = .systemBackground.withAlphaComponent(0.1)
         contentView.layer.cornerRadius = 12
         return contentView
     }()
