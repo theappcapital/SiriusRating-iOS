@@ -29,11 +29,12 @@ class StyleOneRequestViewController: UIViewController {
     }()
 
     /// The white content view containing all the texts and buttons.
-    lazy var contentView: UIView = {
-        let contentView = UIView()
+    lazy var containerView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.systemMaterial)
+        let contentView = UIVisualEffectView(effect: blurEffect)
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.layer.masksToBounds = true
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = .systemBackground.withAlphaComponent(0.22)
         contentView.layer.cornerRadius = 12
         return contentView
     }()
@@ -83,7 +84,7 @@ class StyleOneRequestViewController: UIViewController {
     lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.font = .systemFont(ofSize: 20, weight: .medium)
-        titleLabel.textColor = .black
+        titleLabel.textColor = .label
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0
         return titleLabel
@@ -92,7 +93,7 @@ class StyleOneRequestViewController: UIViewController {
     lazy var durationLabel: UILabel = {
         let durationLabel = UILabel()
         durationLabel.font = .systemFont(ofSize: 14)
-        durationLabel.textColor = .black
+        durationLabel.textColor = .label
         durationLabel.textAlignment = .center
         return durationLabel
     }()
@@ -100,7 +101,7 @@ class StyleOneRequestViewController: UIViewController {
     lazy var descriptionLabel: UILabel = {
         let descriptionLabel = UILabel()
         descriptionLabel.font = .systemFont(ofSize: 15)
-        descriptionLabel.textColor = .gray
+        descriptionLabel.textColor = .secondaryLabel
         descriptionLabel.textAlignment = .center
         descriptionLabel.numberOfLines = 0
         return descriptionLabel
@@ -108,6 +109,8 @@ class StyleOneRequestViewController: UIViewController {
 
     lazy var rateButton: UIButton = {
         let rateButton = UIButton(type: .system)
+        rateButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+        rateButton.setContentCompressionResistancePriority(.required, for: .vertical)
         rateButton.translatesAutoresizingMaskIntoConstraints = false
         rateButton.backgroundColor = UIColor(red: 0.192, green: 0.594, blue: 0.86, alpha: 1.0)
         rateButton.layer.cornerRadius = 5
@@ -116,25 +119,26 @@ class StyleOneRequestViewController: UIViewController {
         rateButton.titleLabel?.font = .systemFont(ofSize: 15, weight: .medium)
         rateButton.setTitleColor(.white, for: .normal)
         rateButton.addTarget(self, action: #selector(self.didTouchUpInsideRateButton), for: .touchUpInside)
-
         return rateButton
     }()
 
     lazy var optInForReminderButton: UIButton = {
         let optInForReminderButton = UIButton(type: .system)
+        optInForReminderButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+        optInForReminderButton.setContentCompressionResistancePriority(.required, for: .vertical)
         optInForReminderButton.translatesAutoresizingMaskIntoConstraints = false
         optInForReminderButton.contentEdgeInsets = UIEdgeInsets(top: 8.0, left: 16.0, bottom: 8.0, right: 16.0)
         optInForReminderButton.titleLabel?.font = .systemFont(ofSize: 15)
-        optInForReminderButton.setTitleColor(.gray, for: .normal)
+        optInForReminderButton.setTitleColor(.secondaryLabel, for: .normal)
         optInForReminderButton.addTarget(self, action: #selector(self.didTouchUpInsideOptInForReminderButton), for: .touchUpInside)
-
         return optInForReminderButton
     }()
 
     lazy var closeButton: UIButton = {
         let closeButton = UIButton(type: .system)
+        closeButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+        closeButton.setContentCompressionResistancePriority(.required, for: .vertical)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
-        closeButton.tintColor = .darkGray
         closeButton.setImage(UIImage(named: "cross_icon", in: Bundle.moduleOrSelf, compatibleWith: nil), for: .normal)
         closeButton.addTarget(
             self,
@@ -146,13 +150,6 @@ class StyleOneRequestViewController: UIViewController {
 
     /// Boolean that determines whether it may dismiss itself by tapping the background.
     var isDismissableByBackgroundTap: Bool = true
-
-    /// The preferred content size of the pop up content view.
-    override var preferredContentSize: CGSize {
-        didSet {
-            self.setupViewLayoutConstraintsForTheContentView()
-        }
-    }
 
     // MARK: - Initialize
 
