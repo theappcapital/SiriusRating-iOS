@@ -9,7 +9,7 @@
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat-square)](https://github.com/Carthage/Carthage)
 [![Swift Package Manager](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange?style=flat-square)](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange?style=flat-square)
 
-<img width="1012" alt="github-banner" src="https://user-images.githubusercontent.com/1652432/189526390-6aee1e21-3350-4eba-99d5-4b82c262f291.png">
+<img width="1012" alt="github-banner" src="https://user-images.githubusercontent.com/1652432/191008311-aa30638e-864c-42ea-97df-730878300906.png">
 
 A modern utility that reminds your iOS app's users to review the app in a non-invasive way.
 
@@ -149,9 +149,13 @@ SiriusRating.setup(
 
 ### Presenters
 
-| StyleOneRequestPromptPresenter (default) | StyleTwoRequestPromptPresenter |
+| StyleOneRequestPromptPresenter (light, default) | StyleOneRequestPromptPresenter (dark, default) |
 | --- | --- |
-| ![Style One](https://user-images.githubusercontent.com/1652432/189687643-158d8bc5-ec16-4265-9547-9b4910eab38d.png) | ![Style Two](https://user-images.githubusercontent.com/1652432/189688643-3bf1edb1-6916-4f7a-a643-174dcb675a1e.png) |
+| ![Style One (light)](https://user-images.githubusercontent.com/1652432/191007601-d2338460-605a-44c1-bb1a-de7079a091ac.png) | ![Style One (dark)](https://user-images.githubusercontent.com/1652432/191007744-f09c8d7e-2085-4258-bf92-807261a96444.png) |
+
+| StyleTwoRequestPromptPresenter (light) | StyleTwoRequestPromptPresenter (dark) |
+| --- | --- |
+| ![Style Two (light)](https://user-images.githubusercontent.com/1652432/191008227-39384b11-fd1c-4e75-a435-cdb8a4d92a1b.png) | ![Style Two (dark)](https://user-images.githubusercontent.com/1652432/191008116-9bb2e298-cfc1-41fd-99ff-2645a855a9fb.png) |
 
 You can change the presenter to the style you wish.
 ```swift
