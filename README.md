@@ -237,7 +237,7 @@ pod 'SiriusRating'
 [Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate SiriusRating into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "theappcapital/SiriusRating"
+github "theappcapital/SiriusRating-iOS"
 ```
 
 ### Swift Package Manager
@@ -248,7 +248,7 @@ Once you have your Swift package set up, adding SiriusRating as a dependency is 
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/theappcapital/SiriusRating.git", .upToNextMajor(from: "1.0.0"))
+    .package(url: "https://github.com/theappcapital/SiriusRating-iOS.git", .upToNextMajor(from: "1.0.0"))
 ]
 ```
 
