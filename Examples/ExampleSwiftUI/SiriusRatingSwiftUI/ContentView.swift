@@ -5,35 +5,35 @@
 //  Created by Thomas Neuteboom on 15/09/2022.
 //
 
-import SwiftUI
 import SiriusRating
+import SwiftUI
 
 @MainActor class ViewModel: ObservableObject {
-    
+
     private let siriusRating: SiriusRating
-    
+
     @Published private(set) var significantEventsCount: UInt
-    
+
     init(siriusRating: SiriusRating = SiriusRating.shared) {
         self.siriusRating = siriusRating
         self.significantEventsCount = siriusRating.dataStore.significantEventCount
     }
-    
+
     func userDidSignificantEvent() {
         self.siriusRating.userDidSignificantEvent()
         self.significantEventsCount = self.siriusRating.dataStore.significantEventCount
     }
-    
+
     func resetAllUsageTrackers() {
         self.siriusRating.resetAllTrackers()
         self.significantEventsCount = self.siriusRating.dataStore.significantEventCount
     }
-    
+
 }
 
 struct ContentView: View {
     @StateObject private var viewModel = ViewModel()
-    
+
     var body: some View {
         VStack {
             Text("Significant events: \(self.viewModel.significantEventsCount)")
@@ -43,7 +43,7 @@ struct ContentView: View {
                 .foregroundColor(.gray)
                 .multilineTextAlignment(.center)
                 .padding(.bottom, 20)
-            
+
             Button {
                 self.viewModel.userDidSignificantEvent()
             } label: {

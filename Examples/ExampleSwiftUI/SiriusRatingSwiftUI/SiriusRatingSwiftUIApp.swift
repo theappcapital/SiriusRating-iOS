@@ -5,12 +5,12 @@
 //  Created by Thomas Neuteboom on 15/09/2022.
 //
 
-import SwiftUI
 import SiriusRating
+import SwiftUI
 
 @main
 struct SiriusRatingSwiftUIApp: App {
-    
+
     init() {
         SiriusRating.setup(
             debugEnabled: true,
@@ -23,11 +23,11 @@ struct SiriusRatingSwiftUIApp: App {
                 NotPostponedDueToReminderRatingCondition(totalDaysBeforeReminding: 14),
                 NotDeclinedToRateAnyVersionRatingCondition(daysAfterDecliningToPromptUserAgain: 30, backOffFactor: 2.0, maxRecurringPromptsAfterDeclining: 3),
                 NotRatedCurrentVersionRatingCondition(),
-                NotRatedAnyVersionRatingCondition(daysAfterRatingToPromptUserAgain: 240, maxRecurringPromptsAfterRating: UInt.max)
+                NotRatedAnyVersionRatingCondition(daysAfterRatingToPromptUserAgain: 240, maxRecurringPromptsAfterRating: UInt.max),
             ]
         )
     }
-    
+
     var body: some Scene {
         WindowGroup {
             ContentView()
