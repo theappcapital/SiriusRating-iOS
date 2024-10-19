@@ -1,7 +1,9 @@
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/1652432/189526292-0ae3b5b7-e565-41f1-86ac-f3c1ffad1e57.png" height="128">
-  <h1 align="center">SiriusRating</h1>
+  <img src="https://github.com/user-attachments/assets/a9db4fb3-3e8c-4caa-85f4-c74857d135a0" height="128">
+  <h1 align="center">SiriusRating iOS</h1>
 </p>
+
+<p align="center"> See: https://github.com/theappcapital/SiriusRating-Android for Android.</p>
 
 [![Swift](https://img.shields.io/badge/Swift-5.3_5.4_5.5_5.6-orange?style=flat-square)](https://img.shields.io/badge/Swift-5.3_5.4_5.5_5.6-Orange?style=flat-square)
 [![Platforms](https://img.shields.io/badge/Platforms-iOS-green?style=flat-square)](https://img.shields.io/badge/Platforms-macOS_iOS_tvOS_watchOS_Linux_Windows-Green?style=flat-square)
@@ -9,49 +11,128 @@
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat-square)](https://github.com/Carthage/Carthage)
 [![Swift Package Manager](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange?style=flat-square)](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange?style=flat-square)
 
-<img width="1012" alt="github-banner" src="https://user-images.githubusercontent.com/1652432/191008311-aa30638e-864c-42ea-97df-730878300906.png">
+<img width="1012" alt="github-banner" src="https://github.com/user-attachments/assets/bc28d818-bf8e-4b67-8dd1-1b11d8622f72">
 
-A modern utility that reminds your iOS app's users to review the app in a non-invasive way.
+A non-invasive and friendly way to remind users to review and rate an iOS app.
 
 ## Features
 
-- [x] SwiftUI and UIKit support
+- [x] Supports 32 languages
+- [x] Unit tested
+- [x] Dark mode compatibility
+- [x] Supports SwiftUI and UIKit
 - [x] Configurable rating conditions
 - [x] Write your own rating conditions to further stimulate positive reviews.
-- [x] Modern design 
-- [x] Non-invasive approach
-- [x] Specification pattern used to build the rating conditions
-- [x] Recurring prompts that are configurable using back-off factors
-- [x] No need to reset usage trackers each app version
-- [x] Option to create your own prompt style
-- [x] Unit tested rating conditions
-- [x] Show prompt even while dismissing view controllers
+- [x] Modern, sleek design
+- [x] Non-invasive prompts
+- [x] Configurable recurring prompts with back-off factors
+- [x] Create custom prompt styles
 
 ## Requirements
-
-- Xcode 11.1+
 - iOS 13.0+
 
 ## Setup
-Configure a SiriusRating shared instance, typically in your App's initializer or app delegate's `application(_:didFinishLaunchingWithOptions:)` method:
+Configure a SiriusRating shared instance, typically in your AppDelegate or your app's initializer.
 
 ### Simple One-line Setup
 
+In the ``application(_:didFinishLaunchingWithOptions:)`` function in AppDelegate:
 ```swift
 SiriusRating.setup()
 ```
 
-By default the following rating conditions are used:
+For example:
+```swift
+//...
+func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    //...
+    SiriusRating.setup()
 
-| Default rating conditions |
-| --- |
-| `EnoughDaysUsedRatingCondition(totalDaysRequired: 30)` | 
-| `EnoughAppSessionsRatingCondition(totalAppSessionsRequired: 15)` | 
-| `EnoughSignificantEventsRatingCondition(significantEventsRequired: 20)` | 
-| `NotPostponedDueToReminderRatingCondition(totalDaysBeforeReminding: 7)` | 
-| `NotDeclinedToRateAnyVersionRatingCondition(daysAfterDecliningToPromptUserAgain: 30, backOffFactor: 2.0, maxRecurringPromptsAfterDeclining: 2)` | 
-| `NotRatedCurrentVersionRatingCondition()` | 
-| `NotRatedAnyVersionRatingCondition(daysAfterRatingToPromptUserAgain: 240, maxRecurringPromptsAfterRating: UInt.max)` | 
+    return true
+}
+```
+
+By default, the user will be prompted to rate the app when the following conditions are met:
+
+- The app has been `installed for at least 30 days`,
+- The user has `opened the app at least 15 times`, and
+- The user has `completed 20 significant events`.
+
+If the user selects 'Remind me later,' they will be prompted again after 7 days.
+If the user declines the prompt, they will be prompted again after 30 days, with a back-off factor of 2. This means that if the user declines a second time, they will be prompted again in 60 days, a third time in 120 days, and so on.
+
+## Installation
+
+### CocoaPods
+
+To integrate SiriusRating into your Xcode project using CocoaPods, specify it in your `Podfile`:
+
+```ruby
+pod 'SiriusRating'
+```
+
+### Carthage
+
+To integrate SiriusRating into your Xcode project using Carthage, specify it in your `Cartfile`:
+
+```ogdl
+github "theappcapital/SiriusRating-iOS"
+```
+
+### Swift Package Manager
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/theappcapital/SiriusRating-iOS.git", .upToNextMajor(from: "1.0.8"))
+]
+```
+
+## Usage
+
+### Significant event
+A significant event defines an important event that occurred in your app. In a time tracking app it might be 
+that a user registered a time entry. In a game, it might be completing a level.
+
+```swift
+SiriusRating.shared.userDidSignificantEvent()
+```
+
+SiriusRating will validate the conditions after each significant event and prompt the user if all conditions are satisfied.
+
+### Test request prompt 
+To see how the request prompt will look like in your app simply use the following code.
+
+```swift
+// For test purposes only.
+SiriusRating.shared.showRequestPrompt()
+```
+
+## Styles
+
+| StyleOneRequestPromptPresenter (light, default) | StyleOneRequestPromptPresenter (dark, default) |
+| --- | --- |
+| ![Style One (light)](https://user-images.githubusercontent.com/1652432/191007601-d2338460-605a-44c1-bb1a-de7079a091ac.png) | ![Style One (dark)](https://user-images.githubusercontent.com/1652432/191007744-f09c8d7e-2085-4258-bf92-807261a96444.png) |
+
+| StyleTwoRequestPromptPresenter (light) | StyleTwoRequestPromptPresenter (dark) |
+| --- | --- |
+| ![Style Two (light)](https://user-images.githubusercontent.com/1652432/191008227-39384b11-fd1c-4e75-a435-cdb8a4d92a1b.png) | ![Style Two (dark)](https://user-images.githubusercontent.com/1652432/191008116-9bb2e298-cfc1-41fd-99ff-2645a855a9fb.png) |
+
+## Rating conditions
+
+The rating conditions are used to validate if the user can be prompted to rate the app. The validation process happens after the user did a significant event (`userDidSignificantEvent()`) or if configured when the app was opened. The user will be prompted to rate the app if all rating conditions are
+satisfied (returning `true`).
+
+| Rating Condition                             | Description                                                                                                                                                                                     |
+|----------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `EnoughAppSessionsRatingCondition`           | Validates whether the app has been launched or brought into the foreground a sufficient number of times.                                                                                        |
+| `EnoughDaysUsedRatingCondition`              | Validates whether the app has been in use for a sufficient duration (in days).                                                                                                                  |
+| `EnoughSignificantEventsRatingCondition`     | Validates whether the user has completed enough significant events.                                                                                                                             |
+| `NotDeclinedToRateAnyVersionRatingCondition` | Validates that the user hasn’t declined to rate any version of the app. If declined, it checks whether enough time has passed since the initial decline before prompting again.                 |
+| `NotPostponedDueToReminderRatingCondition`   | Validates whether the user has opted to be reminded later. If so, it checks if the required number of days has passed to prompt again.                                                          |
+| `NotRatedCurrentVersionRatingCondition`      | Validates whether the user has already rated the current version of the app. The user won’t be prompted again if they’ve already rated this version.                                            |
+| `NotRatedAnyVersionRatingCondition`          | Validates that the user hasn’t rated any version of the app. If the user has previously rated the app, it checks whether enough time has passed since their last rating before prompting again. |
+
+## Customization
 
 ### Custom Configuration
 
@@ -71,50 +152,19 @@ SiriusRating.setup(
     ],
     canPromptUserToRateOnLaunch: true,
     didOptInForReminderHandler: {
-        // analytics.track(.didOptInForReminderToRateApp)
+        //...
     },
     didDeclineToRateHandler: {
-        // analytics.track(.didDeclineToRateApp)
+        //...
     },
     didRateHandler: {
-        // analytics.track(.didRateApp)
+        //...
     }
 )
 ```
 
-## Usage
-
-### Significant event
-A significant event defines an important event that occurred in your app. In a time tracking app it might be 
-that a user registered a time entry. In a game, it might be completing a level.
-
-```swift
-SiriusRating.shared.userDidSignificantEvent()
-```
-
-### Test request prompt 
-To see how the request prompt will look like in your app simply use the following code.
-
-```swift
-// For test purposes only.
-SiriusRating.shared.showRequestPrompt()
-```
-
-## Rating conditions
-The rating conditions are used to validate if the user can be prompted to rate the app. The validation process happens after the user did a significant event (`userDidSignificantEvent()`). The user will be prompted to rate the app if all rating conditions are satisfied (returning `true`).
-
-| Rating conditions | Description |
-| --- | --- |
-| `EnoughAppSessionsRatingCondition` | The rating condition that validates if the app has been launched or brought into the foreground enough times. |
-| `EnoughDaysUsedRatingCondition` | The rating condition that validates if the app has been used long enough. |
-| `EnoughSignificantEventsRatingCondition` | The rating condition that validates whether the user has done enough significant events. |
-| `NotDeclinedToRateAnyVersionRatingCondition` | The rating condition that validates that the user didn't decline to rate a version of the app. If the user did decline to rate the app, validate if we can show the prompt again by checking the number of days that have passed after the user's initial decline. |
-| `NotPostponedDueToReminderRatingCondition` | The rating condition that validates if the user didn't decline the current version of the app. With this condition we do not want to prompt the user to rate the app again if it declined to rate the current version of the app. |
-| `NotPostponedDueToReminderRatingCondition` | The rating condition that validates if the prompt was not postponed due an opted-in reminder. If the user did opt-in for a reminder, it will check if the total number of days have passed to show the prompt again. |
-| `NotRatedCurrentVersionRatingCondition` |  The rating condition that checks if the user didn't already rate the current version of the app. We do not want to prompt the user to rate the app again if it already rated this version of the app. |
-| `NotRatedAnyVersionRatingCondition` | The rating condition that validates that the user didn't rate any version of the app. If the user did rate the app, validate if we can show the prompt again by checking the number of days that have passed since the user's rated last. |
-
 ### Custom rating conditions
+
 You can write your own rating conditions in addition to the current rating conditions to further stimulate positive reviews. 
 
 ```swift
@@ -139,44 +189,16 @@ To make use of the new rating condition simply add it to list.
 ```swift
 SiriusRating.setup(
     ratingConditions: [
-        ...,
+        //...,
         GoodWeatherRatingCondition(weatherRepository: WeatherDataRepository())
     ]
 )
 ```
 
-## Customization
-
-### Presenters
-
-| StyleOneRequestPromptPresenter (light, default) | StyleOneRequestPromptPresenter (dark, default) |
-| --- | --- |
-| ![Style One (light)](https://user-images.githubusercontent.com/1652432/191007601-d2338460-605a-44c1-bb1a-de7079a091ac.png) | ![Style One (dark)](https://user-images.githubusercontent.com/1652432/191007744-f09c8d7e-2085-4258-bf92-807261a96444.png) |
-
-| StyleTwoRequestPromptPresenter (light) | StyleTwoRequestPromptPresenter (dark) |
-| --- | --- |
-| ![Style Two (light)](https://user-images.githubusercontent.com/1652432/191008227-39384b11-fd1c-4e75-a435-cdb8a4d92a1b.png) | ![Style Two (dark)](https://user-images.githubusercontent.com/1652432/191008116-9bb2e298-cfc1-41fd-99ff-2645a855a9fb.png) |
-
 You can change the presenter to the style you wish.
 ```swift
 SiriusRating.setup(
     requestPromptPresenter: StyleTwoRequestPromptPresenter()
-)
-```
-You can even create your own presenter by extending from `RequestPromptPresenter`.
-```swift
-class YourCustomStyleRequestPromptPresenter: RequestPromptPresenter {
-    
-    func show(didAgreeToRateHandler: (() -> Void)?, didOptInForReminderHandler: (() -> Void)?, didDeclineHandler: (() -> Void)?) {
-        // Your implementation here. Make sure you call the handlers.
-    }
-    
-}
-```
-And implement it as follows.
-```swift
-SiriusRating.setup(
-    requestPromptPresenter: YourCustomStyleRequestPromptPresenter()
 )
 ```
 
@@ -193,7 +215,6 @@ Then you can change the texts in your localizable strings file, for example in: 
 
 ```swift
 // ...
-
 "request_prompt_title" = "Rate %@";
 "request_prompt_duration" = "(duration: less than 10 seconds)";
 "request_prompt_description" = "If you enjoy using %@, would you mind taking a moment to rate it? Thanks for your support!";
@@ -222,40 +243,7 @@ SiriusRating.setup(
 )
 ```
 
-## Installation
-
-### CocoaPods
-
-[CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate SiriusRating into your Xcode project using CocoaPods, specify it in your `Podfile`:
-
-```ruby
-pod 'SiriusRating'
-```
-
-### Carthage
-
-[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate SiriusRating into your Xcode project using Carthage, specify it in your `Cartfile`:
-
-```ogdl
-github "theappcapital/SiriusRating-iOS"
-```
-
-### Swift Package Manager
-
-The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler. 
-
-Once you have your Swift package set up, adding SiriusRating as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
-
-```swift
-dependencies: [
-    .package(url: "https://github.com/theappcapital/SiriusRating-iOS.git", .upToNextMajor(from: "1.0.0"))
-]
-```
-
-### Manually
-
-If you prefer not to use any of the aforementioned dependency managers, you can integrate SiriusRating into your project manually.
-
 ## License
 
 SiriusRating is released under the MIT license. [See LICENSE](https://github.com/theappcapital/SiriusRating/blob/master/LICENSE) for details.
+
