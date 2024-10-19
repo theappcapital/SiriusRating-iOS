@@ -5,8 +5,8 @@
 
 <p align="center"> See: https://github.com/theappcapital/SiriusRating-Android for Android.</p>
 
-[![Swift](https://img.shields.io/badge/Swift-5.3_5.4_5.5_5.6-orange?style=flat-square)](https://img.shields.io/badge/Swift-5.3_5.4_5.5_5.6-Orange?style=flat-square)
-[![Platforms](https://img.shields.io/badge/Platforms-iOS-green?style=flat-square)](https://img.shields.io/badge/Platforms-macOS_iOS_tvOS_watchOS_Linux_Windows-Green?style=flat-square)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Ftheappcapital%2FSiriusRating-iOS%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/theappcapital/SiriusRating-iOS)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Ftheappcapital%2FSiriusRating-iOS%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/theappcapital/SiriusRating-iOS)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/SiriusRating.svg?style=flat-square)](https://img.shields.io/cocoapods/v/SiriusRating.svg)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat-square)](https://github.com/Carthage/Carthage)
 [![Swift Package Manager](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange?style=flat-square)](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange?style=flat-square)
