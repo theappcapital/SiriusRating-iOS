@@ -141,12 +141,12 @@ SiriusRating.setup(
     requestPromptPresenter: StyleTwoRequestPromptPresenter(),
     debugEnabled: true,
     ratingConditions: [
-        EnoughDaysUsedRatingCondition(totalDaysRequired: 14),
-        EnoughAppSessionsRatingCondition(totalAppSessionsRequired: 20),
-        EnoughSignificantEventsRatingCondition(significantEventsRequired: 30),
-        // Important rating conditions, do not forget these:
+        EnoughDaysUsedRatingCondition(totalDaysRequired = 0),
+        EnoughAppSessionsRatingCondition(totalAppSessionsRequired = 0),
+        EnoughSignificantEventsRatingCondition(significantEventsRequired = 5),
+        // Essential rating conditions below: Ensure these are included to prevent the prompt from appearing continuously.
         NotPostponedDueToReminderRatingCondition(totalDaysBeforeReminding: 14),
-        NotDeclinedToRateAnyVersionRatingCondition(daysAfterDecliningToPromptUserAgain: 30, backOffFactor: 2.0, maxRecurringPromptsAfterDeclining: 3),
+        NotDeclinedToRateAnyVersionRatingCondition(daysAfterDecliningToPromptUserAgain: 30, backOffFactor: 2.0, maxRecurringPromptsAfterDeclining: 2),
         NotRatedCurrentVersionRatingCondition(),
         NotRatedAnyVersionRatingCondition(daysAfterRatingToPromptUserAgain: 240, maxRecurringPromptsAfterRating: UInt.max)
     ],
